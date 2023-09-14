@@ -17,4 +17,4 @@ def test_work():
 	assert work_calc(12, 2, 2,lambda n: n+n) == 80
 	assert work_calc(1, 1, 2, lambda n: n*n) == 1
 	
-
+ 

@@ -137,5 +137,5 @@ def work_fn1(n):
 def work_fn2(n):
 	return work_calc(n, 8, 2, lambda n: math.pow(n,8.0))
 
-print_results(test_compare_span())
+print_results(test_compare_span()) 
 
