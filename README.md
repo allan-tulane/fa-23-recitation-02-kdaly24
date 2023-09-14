@@ -1,7 +1,7 @@
 # CMPS 2200  Recitation 02
 
-**Name (Team Member 1):**_________________________  
-**Name (Team Member 2):**_________________________
+**Name (Team Member 1):**____Simon Yung_________  
+**Name (Team Member 2):**____Reid Miller__________
 
 In this recitation, we will investigate recurrences. 
 To complete this recitation, follow the instructions in this document. Some of your answers will go in this file, and others will require you to edit `main.py`.
@@ -40,12 +40,37 @@ where $W(1) = 1$.
 
 - [ ] 4. (2 point) Now, derive the asymptotic behavior of $W(n)$ using $f(n) = 1$, $f(n) = \log n$ and $f(n) = n$. Then, generate actual values for $W(n)$ for your code and confirm that the trends match your derivations.
 
-**TODO: your answer goes here**
+The asymptotic behavior of $W(n)$ I found as follows:
+  For $f(n) = 1$, $O(n)$
+  For $f(n) = \log n$, $O(nlogn)$
+  For $f(n) = n$, $O(n^2)$
+
+Testing inputs to confirm, I found that for the respective values of n ( 1, 10, 100):
+
+$f(n) = 1$ returned 1, 15, and 127
+$f(n) = \log n$ returned: 1, 36, 652
+$f(n) = n$ returned: 1, 174, 19580
+
+This tells me that my findings math the trend, as $n$ scales nearly exponentially related to the other two, and $\log n$ 's results are more than that of $1$. 
 
 - [ ] 5. (4 points) Now that you have a nice way to empirically generate valuess of $W(n)$, we can look at the relationship between $a$, $b$, and $f(n)$. Suppose that $f(n) = n^c$. What is the asypmptotic behavior of $W(n)$ if $c < \log_b a$? What about $c > \log_b a$? And if they are equal? Modify `compare_work` to compare empirical values for different work functions (at several different values of $n$) to justify your answer. 
 
-**TODO: your answer goes here**
+Testing with constant $a$ and $b$, but changing $c$, we can understand the relationship between the two. When $c < \log_b a$, $\log_b a$ runs larger and is asymptotically dominant, meaning that the runtime would align with O(n^log_b a). In contrast, $c > \log_b a$ makes it so that $n^c$ greatly outpaces $\log_b a$, meaning that runtime would be $O(n^c)$. If they are balanced, it is hard to determine which one is dominant. in that case, runtime would be something to the effect of O(n^c + n^(\log_b a) ).
+
+|     n |               W_1 |                                   W_2 |
+|-------|-------------------|---------------------------------------|
+|    10 |          1068.000 |                         103141896.000 |
+|    20 |          8944.000 |                       26425135168.000 |
+|    50 |        104780.000 |                    40311608823560.000 |
+|   100 |        848240.000 |                 10322492870588480.000 |
+|  1000 |     509190592.000 |         1032258003030777230524416.000 |
+|  5000 |  143543110592.000 |    403225801556827884938718085120.000 |
+| 10000 | 1148444884736.000 | 103225806412454631260421716180992.000 |
 
 - [ ] 6. (3 points) $W(n)$ is meant to represent the running time of some recursive algorithm. Suppose we always had $a$ processors available to us and we wanted to compute the span of the same algorithm. Implement the function `span_calc` to compute the empirical span, where the work of the algorithm is given by $W(n)$. Implement `test_compare_span` to create a new comparison function for comparing span functions. Derive the asymptotic expressions for the span of the recurrences you used in problem 4 above. Confirm that everything matches up as it should. 
 
-**TODO: your answer goes here**
+For the recurrences in problem 4, span calculates by looking at the depth of the tree. As the tree continues to split, it does so according to the $b$ value. 
+With this in mind, I believe the span for the recurrences is O(n^logba). My answer is supported by span_calc as for the differing f(n) values, they remain proportional to one another as n increases.
+
+
+
